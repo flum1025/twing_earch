@@ -73,7 +73,7 @@ The value corresponding to a key is need to `Array`. You can use multiple rules 
 Argument|DataType|Example|Comments
 ---|---|---|---
 text|String|`text: tweet text`
-||Regexp|`text: !ruby/regexp /^\d+$/`
+||Regexp|`text:`<br>&nbsp;&nbsp;`type: regexp`<br>&nbsp;&nbsp;`  match: ^\d+$`
 user_id|String|`user_id: "12345"`|Not a number
 user_name|String|`user_name: twitter name`
 ||Regexp|`user_name: !ruby/regexp /^[A-Z]+$/`
