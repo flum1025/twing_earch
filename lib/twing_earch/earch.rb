@@ -7,7 +7,6 @@ class Earch < Twing::Modules::Base
   attr_reader :notify, :rules
 
   def initialize(*args)
-    p 1
     super
     @notify = Notify.new(setting.slack)
     @rules = Rules.new(setting.rules || {})
