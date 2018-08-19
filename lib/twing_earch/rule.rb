@@ -31,11 +31,11 @@ class Earch::Rule
   end
 
   def user_name(rule, object)
-    compare(rule, object.user)
+    compare(rule, object.user.name)
   end
 
   def screen_name(rule, object)
-    compare(rule, object.screen_name)
+    compare(rule, object.user.screen_name)
   end
 
   def favorite_count(rule, object)
