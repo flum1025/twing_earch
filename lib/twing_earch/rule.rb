@@ -16,6 +16,7 @@ class Earch::Rule
       end
 
       return Regexp.new(condition.match) if condition.type == 'regexp'
+      return Range.new(*condition.match.split('..').map(&:to_i)) if condition.type == 'range'
     end
 
     condition
