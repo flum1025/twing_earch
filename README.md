@@ -1,34 +1,99 @@
 # TwingEarch
 
-Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/twing_earch`. To experiment with that code, run `bin/console` for an interactive prompt.
+This application monitors the Twitter timeline and notifies Slack according to the conditions.
 
-TODO: Delete this and the text above, and describe your gem
+<img width="631" alt="2017-08-25 11 28 11" src="https://user-images.githubusercontent.com/9972700/29697194-a281ca3e-8988-11e7-9027-67449a9e2e34.png">
+
+Migration from [earch](https://github.com/flum1025/earch)
 
 ## Installation
 
-Add this line to your application's Gemfile:
-
-```ruby
-gem 'twing_earch'
-```
-
-And then execute:
-
-    $ bundle
-
-Or install it yourself as:
+Add this line to your application's Gemfile
 
     $ gem install twing_earch
 
 ## Usage
 
-TODO: Write usage instructions here
+Add configuration
 
-## Development
+REF: [twing#configuration-file](https://github.com/flum1025/twing#configuration-file)
 
-After checking out the repo, run `bin/setup` to install dependencies. You can also run `bin/console` for an interactive prompt that will allow you to experiment.
+Example
 
-To install this gem onto your local machine, run `bundle exec rake install`. To release a new version, update the version number in `version.rb`, and then run `bundle exec rake release`, which will create a git tag for the version, push git commits and tags, and push the `.gem` file to [rubygems.org](https://rubygems.org).
+```yaml
+modules:
+  earch:
+    slack:
+      api_key:
+        token: xxxxxxxxxxxxxxxxxxxxx
+      user_icon: ':earch:'
+      notify_channel: '#earch'
+      icon: ':flum_:'
+      source_user: flum_
+    rules:
+      - text:
+          type: regexp
+          match test.*
+        screen_name: twitterdev
+      - hashtag:
+          - test
+          - events
+        favorite_count: 50
+      - retweet_count:
+          type: range
+          match 0..10
+      - lang: ja
+        retweet: false
+        quote: false
+        reply: true
+```
+
+And, run
+
+    $ twing -s setting.yml --home-timeline --earch
+
+## Configuration File
+
+### slack
+
+This key is for `Slack` configuration.
+
+Argument|Required|Description
+---|---|---
+api_key|Required|Get from [Bots](https://your-team.slack.com/apps/manage/custom-integrations)
+user_icon|Optional|Set the [Slack emoji](https://flum1025.slack.com/customize/emoji)
+notify_channel|Required|Specify the notification channel
+icon|Optional|Set your Twitter account icon
+source_user|Optional|Set your Twitter screen_name
+
+### rules
+
+The value corresponding to a key is need to `Array`. You can use multiple rules and conditions.
+
+Argument|DataType|Example|Comments
+---|---|---|---
+text|String|`text: tweet text`
+||Regexp|`text: !ruby/regexp /^\d+$/`
+user_id|String|`user_id: "12345"`|Not a number
+user_name|String|`user_name: twitter name`
+||Regexp|`user_name: !ruby/regexp /^[A-Z]+$/`
+screen_name|String|`screen_name: screen name`
+||Regexp|`screen_name: !ruby/regexp /^@test[0-9]+/`
+favorite_count|Integer|`favorite_count: 50`|Get over 50 the number of favorites
+||Range|`favorite_count: !ruby/range 10..20`|The number of favorites is 10 to 20
+retweet_count|Integer|`retweet_count: 50`
+||Range|`retweet_count: !ruby/range 10..20`
+lang|String|`lang: ja`
+||Regexp|`lang: !ruby/regexp /ja\|en/`
+user_lang|String|`user_lang: ja`
+||Regexp|`user_lang: !ruby/regexp /ja\|en/`
+source|Array\<String>|`source: [TweetDeck, Twitter for WEB]`
+hashtag|Array\<String>|`source: [test, memo]`|
+mention|Array\<String>|`source: [twitter, twitterdev]`|String for screen_name
+||Array\<Integer>|`source: [123, 456]`|Integer for id
+reply|Boolean|`reply: false`
+quote|Boolean|`quote: false`
+retweet|Boolean|`retweet: false`
 
 ## Contributing
 
