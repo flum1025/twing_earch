@@ -76,17 +76,17 @@ text|String|`text: tweet text`
 ||Regexp|`text:`<br>&nbsp;&nbsp;`type: regexp`<br>&nbsp;&nbsp;`  match: ^\d+$`
 user_id|String|`user_id: "12345"`|Not a number
 user_name|String|`user_name: twitter name`
-||Regexp|`user_name: !ruby/regexp /^[A-Z]+$/`
+||Regexp|`user_name:`<br>&nbsp;&nbsp;`type: regexp`<br>&nbsp;&nbsp;`  match: ^[A-Z]+$`
 screen_name|String|`screen_name: screen name`
-||Regexp|`screen_name: !ruby/regexp /^@test[0-9]+/`
+||Regexp|`screen_name:`<br>&nbsp;&nbsp;`type: regexp`<br>&nbsp;&nbsp;`  match: ^@test[0-9]+`
 favorite_count|Integer|`favorite_count: 50`|Get over 50 the number of favorites
-||Range|`favorite_count: !ruby/range 10..20`|The number of favorites is 10 to 20
+||Range|`favorite_count:`<br>&nbsp;&nbsp;`type: range`<br>&nbsp;&nbsp;`  match: 10..20`|The number of favorites is 10 to 20
 retweet_count|Integer|`retweet_count: 50`
-||Range|`retweet_count: !ruby/range 10..20`
+||Range|`retweet_count:`<br>&nbsp;&nbsp;`type: range`<br>&nbsp;&nbsp;`  match: 10..20`
 lang|String|`lang: ja`
-||Regexp|`lang: !ruby/regexp /ja\|en/`
+||Regexp|`lang:`<br>&nbsp;&nbsp;`type: regexp`<br>&nbsp;&nbsp;`  match: ja\|en`
 user_lang|String|`user_lang: ja`
-||Regexp|`user_lang: !ruby/regexp /ja\|en/`
+||Regexp|`user_lang:`<br>&nbsp;&nbsp;`type: regexp`<br>&nbsp;&nbsp;`  match: ja\|en`
 source|Array\<String>|`source: [TweetDeck, Twitter for WEB]`
 hashtag|Array\<String>|`source: [test, memo]`|
 mention|Array\<String>|`source: [twitter, twitterdev]`|String for screen_name
